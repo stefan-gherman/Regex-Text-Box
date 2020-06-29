@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace RegexTextBox
 {
@@ -76,6 +77,19 @@ namespace RegexTextBox
             NameCheck(txtName.Text);
             EmailCheck(txtEmail.Text);
             PhoneCheck(txtPhone.Text);
+
+            var fileRead = new StreamReader(@"C:\Users\Stefan Gherman\source\repos\RegexTextBox\.gitignore", false);
+            string fileContents = fileRead.ReadToEnd().ToString();
+            Console.WriteLine(fileContents);
+            fileRead.Close();
+
+            FileStream file = File.Create(@"C:\Users\Stefan Gherman\source\repos\RegexTextBox\utf-7.txt");
+            StreamWriter fileWrite = new StreamWriter(file,Encoding.UTF32);
+            fileWrite.Write(fileContents);
+            fileWrite.WriteLine("öåäAna are mere");
+            fileWrite.Close();
+            file.Close();
+
         }
     }
 }
