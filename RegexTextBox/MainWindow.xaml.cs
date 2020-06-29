@@ -49,10 +49,33 @@ namespace RegexTextBox
             }
         }
 
+        public void PhoneCheck(string phone)
+        {
+            string phoneRegex = @"^\(?(\d{3})\)?[\s\-]?(\d{3})\-?(\d{4})$";
+            if(!Regex.IsMatch(phone, phoneRegex))
+            {
+                MessageBox.Show("Invalid Phone");
+            }
+            else
+            {
+                txtPhone.Text = PhoneFormat(phone);
+            }
+           
+        }
+
+        public string PhoneFormat(string phone)
+        {
+            string phoneRegex = @"^\(?(\d{3})\)?[\s\-]?(\d{3})\-?(\d{4})$";
+            return Regex.Replace(phone, phoneRegex, @"($1)-$2-$3");
+        }
+
+
+
         private void svButton_Click(object sender, RoutedEventArgs e)
         {
             NameCheck(txtName.Text);
             EmailCheck(txtEmail.Text);
+            PhoneCheck(txtPhone.Text);
         }
     }
 }
